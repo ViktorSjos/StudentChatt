@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (input.value.trim() !== '') {
             var chatBox = document.getElementById('chat-box');
             var newMessage = document.createElement('div');
+            newMessage.classList.add('message'); // Apply message class
             newMessage.textContent = input.value;
             chatBox.appendChild(newMessage);
             input.value = ''; // Clear the input after sending
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listener for the enter key
     input.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default action to stop form submission
             sendMessage();
         }
     });

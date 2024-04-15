@@ -28,3 +28,20 @@ body {
     margin-right: 5px;
     flex-grow: 1;
 }
+
+.message {
+    font-size: 18px; /* Larger font size */
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    width: fit-content;
+    max-width: 90%;
+}
+
+.message:nth-child(odd) {
+    background-color: #f1f1f1; /* Light grey for odd messages */
+}
+
+.message:nth-child(even) {
+    background-color: #e0e0ff; /* Light blue for even messages */
+}
