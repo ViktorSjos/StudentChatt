@@ -1,14 +1,18 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sample HTML File</title>
-    <link rel="stylesheet" type="text/css" href="styling.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="row">Welcome to the student chatt</h1>
-
-    <p class="row">Here you can chat</p>
-
-    <p class="row">with other students and amaing opertunities to get work from companies</p>
+<div id="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="chat-input" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
