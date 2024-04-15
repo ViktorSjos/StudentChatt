@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var input = document.getElementById('chat-input');
+    var input = document.querySelector('.chat-input'); // Changed to class selector
     var button = document.querySelector('button');
+    var chatBox = document.querySelector('.chat-box'); // Moved here and changed to class selector
 
     // Function to send message
     function sendMessage() {
         if (input.value.trim() !== '') {
-            var chatBox = document.getElementById('chat-box');
             var newMessage = document.createElement('div');
             newMessage.classList.add('message'); // Apply message class
             newMessage.textContent = input.value;
