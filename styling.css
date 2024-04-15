@@ -6,7 +6,7 @@ body {
     flex-basis: 100%;
   }
 
-#chat-container {
+.chat-container {
     width: 300px;
     height: 400px;
     border: 1px solid #000;
@@ -16,7 +16,7 @@ body {
     flex-direction: column;
 }
 
-#chat-box {
+.chat-box {
     height: 300px;
     overflow-y: auto;
     margin-bottom: 10px;
@@ -24,7 +24,7 @@ body {
     border: 1px solid #ccc;
 }
 
-#chat-input {
+.chat-box {
     margin-right: 5px;
     flex-grow: 1;
 }
