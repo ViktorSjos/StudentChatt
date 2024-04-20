@@ -34,7 +34,9 @@ body {
     padding: 5px;
     margin-bottom: 5px;
     border-radius: 4px;
-    width: fit-content;
+    width: -webkit-fit-content; /* For Safari */
+    width: -moz-fit-content; /* For Firefox */
+    width: fit-content; /* Standard */
     max-width: 90%;
 }
 
