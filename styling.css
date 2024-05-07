@@ -92,7 +92,7 @@ body, html {
 /* Styling for the send button */
 button {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #7d8185;
     color: white;
     border: none;
     border-radius: 5px;
@@ -100,7 +100,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #1e5c9f;
 }
 
 .context-menu {
@@ -129,24 +129,25 @@ button:hover {
 
 .login-container {
     width: 300px;
-    padding: 20px;
+    padding: 50px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     margin: 100px auto;
     text-align: center;
+    height: 390px;
   }
   .login-container h2 {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
   input[type="text"], input[type="password"] {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
   }
   input[type="submit"] {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -155,15 +156,21 @@ button:hover {
     cursor: pointer;
   }
   input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #09233f;
   }
-  .signUpButton {
+  
+  /* New class for the background image */
+.background-image {
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #193c63;
-    color: white;
-    cursor: pointer;
-  }
+    height: 100%;
+    background: url('images/81998B8A-7F79-4052-BED3-517A1C9C16BB.jpeg') no-repeat center center;
+    background-size: cover;
+    z-index: -1; /* Ensures the image stays behind other content */
+    filter: blur(1.5px);
+}
+  
+
   
