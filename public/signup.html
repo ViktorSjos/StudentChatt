@@ -10,16 +10,56 @@
 <body>
     <div class="background-image"></div>
     <div class="signUp-container">
+
+        <div class="select-wrapper">
+            <select>
+                <option value="">Select Education</option>
+                <option value="Option 1">Statsvetenskap</option>
+                <option value="Option 2">Systemvetenskap</option>
+                <option value="Option 3">Grafisk Design</option>
+                <option value="Option 4">Digital Tjänsteutveckling</option>
+                <option value="Option 5">Sociologi</option>
+                <option value="Option 6">Psykologi</option>
+                <option value="Option 7">Rättsvetenskap</option>
+
+            </select>
+            <div class="arrow"></div>
+        </div>
         
         <h2 class="rubrikStu1">STU</h2>
         
         <form>
-          <input type="text" placeholder="Username" required>
-          <input type="text" placeholder="Username" required>
-          <input type="text" placeholder="Username" required>
+            <div class="role-section">
+                <input type="radio" id="student" name="role" checked/>
+                <label for="student">Student</label>
+                <input type="radio" id="organization" name="role"/>
+                <label for="organization">Organization</label>
+            </div>
 
+           
+            <div class="arrow"></div>
+           
+
+          <input type="email" placeholder="Email" required>
+          <input type="text" placeholder="Username" required>
           <input type="password" placeholder="Password" required>
-          <input type="submit" value="Create Account">
+          <select id="education" name="education" required>
+             <option value="">--Select Education--</option>
+             <option value="">Statsvetenskap</option>
+             <option value="">Systemvetenskap</option>
+             <option value="">Grafisk Design</option>
+             <option value="">Digital Tjänsteutveckling</option>
+             <option value="">Sociologi</option>
+             <option value="">Psykologi</option>
+             <option value="">Rättsvetenskap</option>
+          </select>
+          
+        <div class="button-container">
+            <input type="button" value="Log In">
+            <input type="submit" value="Create Account">
+        </div>
+
+            
         </form>
     </div>
 </body>
