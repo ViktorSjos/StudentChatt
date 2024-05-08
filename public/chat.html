@@ -3,17 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chat</title>
-    <link rel="stylesheet" href="styling.css">
+    <title>Messaging App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="chat-container">
-    <div class="chat-box"></div>
-    <input type="text" class="chat-input" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
-</div>
-<script src="script.js"></script>
+    <div class="sidebar">
+        <h1>Privat</h1>
+        <ul id="chat-list">
+            <li data-chat="anna">Anna Botski</li>
+            <li data-chat="emma">Emma Santos</li>
+            <li data-chat="ruben" class="active">Ruben Urman</li>
+            <!-- Add more contacts here -->
+        </ul>
+    </div>
+    <div class="chat-window">
+        <div class="header">Chat</div>
+        
+        <!-- Main container for the chat application, centered on the page -->
+        <div class="chat-container">
+            <!-- Container for displaying messages -->
+            <div class="chat-box"></div>
+            <!-- Container for input and send button, positioned at the bottom -->
+            <div class="input-container">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
 
+        <!-- Context menu for message actions -->
+        <div id="context-menu" class="context-menu" style="display: none;">
+            <ul>
+                <li id="delete-option">Delete</li>
+            </ul>
+        </div>
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
