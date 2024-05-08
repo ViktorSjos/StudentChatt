@@ -1,13 +1,6 @@
 /* HÄR BÖRJAR KOD FÖR LOGIN */
 
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Garamond', serif; /* Garamond is the primary font, with a generic serif as fallback */
-}
+
 .login-container {
     width: 320px;
     padding: 50px;
@@ -21,7 +14,6 @@ body, html {
     border: 4px solid #032040; /* Corrected border property */
 
   }
-  
   input[type="text"], input[type="password"] {
     width: 100%;
     padding: 10px;
@@ -74,17 +66,16 @@ body, html {
   
 
   .background-image {
-    position: fixed;
+    position: fixed; /* Fixed position to cover the entire viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('./images/81998B8A-7F79-4052-BED3-517A1C9C16BB.jpeg') no-repeat center center;
+    background: url('images/81998B8A-7F79-4052-BED3-517A1C9C16BB.jpeg') no-repeat center center;
     background-size: cover;
-    z-index: -1;
+    z-index: -1; /* Ensures the image stays behind other content */
     filter: blur(1.5px);
-  }
-  
+}
 .rubrikStu {
     color: #032040;
     font-size: 2.7em; /* 2.25 times the size of the current font size */
@@ -93,3 +84,4 @@ body, html {
 }
   
 /* HÄR SLUTAR KOD FÖR LOGIN */
+
