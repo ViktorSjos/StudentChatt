@@ -47,6 +47,55 @@ body {
     overflow-y: auto;
 }
 
+.user-id-label, .time-label {
+    font-size: 0.75rem;
+    color: #666;
+    flex: 1; /* Allows both labels to take equal space in the container */
+    padding: 2px 5px; /* Padding for better text display */
+}
+
+
+/* Specific background color for right-aligned messages */
+.right .message {
+    background-color: #dcf8c6; /* Light green background specifically for messages within .right */
+}
+
+/* Specific background color for left-aligned messages (optional) */
+.left .message {
+    background-color: #add8e6; /* Light blue background specifically for messages within .left */
+}
+
+.chat-container {
+    width: 70%; /* Increased width for larger display */
+    height: 80%; /* Increased height for extended chat history */
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Styling for the chat box where messages are displayed */
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Aligns message container for user ID 1 to the right */
+.right {
+    margin-left: auto; /* Pushes the container to the right */
+    margin-right: 0; /* Keeps container at the right edge */
+    width: 80%; /* Sets the width of the message box to 80% */
+}
+
+/* Aligns message container for other user IDs to the left */
+.left {
+    margin-right: auto; /* Pushes the container to the left */
+    margin-left: 0; /* Keeps container at the left edge */
+    width: 80%; /* Sets the width of the message box to 80% */
+}
+
 .message {
     background-color: #ddd;
     margin-bottom: 10px;
@@ -75,3 +124,4 @@ body {
     padding: 10px 20px;
     cursor: pointer;
 }
+

@@ -15,8 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parses URL-encoded bodies
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'stutest',
+    password: 'admin',
+    database: 'StuTest',
     charset: 'utf8mb4'
 });
 
@@ -52,15 +52,27 @@ app.post('/login', (req, res) => {
 
 // API endpoint to fetch all chat messages
 app.get('/get-messages', (req, res) => {
-    const sql = "SELECT id, message, userid, DATE_FORMAT(senttime, '%H:%i') AS senttime FROM messages";
+    const sql = `
+        SELECT users.username, messages.message, DATE_FORMAT(messages.senttime, '%Y-%m-%d %H:%i:%s') AS senttime
+        FROM messages
+        JOIN users ON messages.userid = users.user_id
+        ORDER BY messages.senttime DESC;
+    `;
+
     db.query(sql, (error, results) => {
         if (error) {
             console.error('Error retrieving messages:', error.message);
             return res.status(500).send('Error retrieving messages');
         }
+        console.log('Retrieved messages:', results);  // Add this line to check the output
         res.json(results); // Return formatted messages to the client
     });
 });
+
+
+
+
+
 
 // Endpoint to delete a message by its ID
 app.delete('/delete-message/:id', (req, res) => {
