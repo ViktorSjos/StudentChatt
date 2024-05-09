@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parses URL-encoded bodies
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'admin',
+    password: '',
     database: 'StuTest',
     charset: 'utf8mb4'
 });

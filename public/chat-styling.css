@@ -3,10 +3,36 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.navmenu {
+    width: 45px; /* Width of the navigation menu */
+    background-color: #032040;
+    display: flex; /* Ensures content is flexibly arranged */
+    flex-direction: column; /* Aligns children (icons) vertically */
+    align-items: center; /* Centers content horizontally in the container */
+    justify-content: flex-start; /* Aligns children to start from the top */
+    height: 100vh; /* Full height */
+    transition: background-color 0,3s;
+}
+
+.navmenu img {
+   padding: 10px;
+    height: auto; /* Maintain aspect ratio */
+    max-width: 20px; /* Optional: you can limit the image size further if necessary */
+    transition: transform 0.3s;
+}
+
+.navmenu a:hover, .navmenu a:focus {
+    background-color: rgb(7, 80, 153); /* Change background on hover */
+    outline: none; /* Remove focus outline */
+    border-radius: 50%;
+}
+
+
+
+
 .sidebar {
     width: 200px;
-    background-color: #f0f0f0;
-    padding: 20px;
+    background-color: #ffffff;
     height: 100vh;
     overflow-y: auto;
 }
@@ -14,16 +40,24 @@ body {
 .sidebar h1 {
     font-size: 18px;
     color: black;
+    padding: 6px;
+    text-align:center;
+    font-weight: 150;
+    
 }
 
 .sidebar ul {
     list-style: none;
     padding: 0;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .sidebar li {
-    padding: 8px;
+    padding: 0px;
     cursor: pointer;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .sidebar li.active {
