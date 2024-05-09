@@ -7,6 +7,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
+app.use(express.static('public'));
 app.use(bodyParser.json()); // Parses JSON-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parses URL-encoded bodies
 
@@ -14,8 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parses URL-encoded bodies
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'admin',
-    database: 'StuTest',
+    password: '',
+    database: 'stutest',
     charset: 'utf8mb4'
 });
 
@@ -27,17 +28,15 @@ db.connect((err) => {
     console.log('Connected to the MySQL server.');
 });
 
-// Serve static files from the 'public' directory
-// Serve the login page as the main page
+// Redirect root to /chat.html
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/login.html');
+    res.redirect('/chat');
 });
 
-// Serve the chat page on a different route
+// Serve the chat page
 app.get('/chat', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/chat.html');
 });
-
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -50,9 +49,6 @@ app.post('/login', (req, res) => {
         res.status(401).json({ success: false });
     }
 });
-
-
-
 
 // API endpoint to fetch all chat messages
 app.get('/get-messages', (req, res) => {
