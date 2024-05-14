@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging App</title>
+    <link rel="stylesheet" href="chat-styling.css">
+</head>
+<body>
+        <div class="navmenu">
+                <a href="index.html">
+            <img src="images/back.png" alt="Backa till main">
+        </a>
+        <a href="chat-private.html">
+            <img src="images/user.png" alt="Privata chattar">
+        </a><a href="chat-group.html" class="active">
+            <img src="images/group.png" alt="Gruppchattar">
+        </a>
+            <a href="chat-business.html">
+                <img src="images/suitcase.png" alt="Företagschattar">
+            </a>
+       </div>
+    <div class="sidebar">
+        <h1>Gruppchattar</h1>
+        <ul id="chat-list">
+            <!-- Users will be loaded here dynamically -->
+        </ul>
+    </div>
+    <div class="chat-window">
+        <div class="header">Chat</div>
+        
+        <!-- Main container for the chat application, centered on the page -->
+        <div class="chat-container">
+            <!-- Container for displaying messages -->
+            <div class="chat-box"></div>
+            <!-- Container for input and send button, positioned at the bottom -->
+            <div class="input-container">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+
+        <!-- Context menu for message actions -->
+        <div id="context-menu" class="context-menu" style="display: none;">
+            <ul>
+                <li id="delete-option">Delete</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
