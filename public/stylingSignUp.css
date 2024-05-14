@@ -1,169 +1,130 @@
 body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'sans-serif'; /* Garamond is the primary font, with a generic serif as fallback */
+  font-family: sans-serif;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-/* HÄR BÖRJAR KOD FÖR SIGNUP */
-.rubrikStu1 {
-    color: #032040;
-    font-size: 1.7em; /* 2.25 times the size of the current font size */
-    margin-top: 1px;
-
-}
-
+  
 .signUp-container {
-    width: 320px;
-    padding: 50px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    margin: 100px auto;
-    text-align: center;
-    height: 550px;
-    font-family: 'sans-serif', serif; /* Garamond is the primary font, with a generic serif as fallback */
-    margin-bottom: 50px;
-    border: 4px solid #032040; /* Corrected border property */
+  width: 320px;
+  padding: 50px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  margin: 100px auto;
+  text-align: center;
+  height: 550px;
+  font-family: sans-serif;
+  margin-bottom: 50px;
+  border: 4px solid #032040;
+}
 
-  }
+.rubrikStu1 {
+  color: #032040;
+  font-family: sans-serif;
+  font-size: 1.7em;
+  margin-top: 1px;
+}
 
-  input[type="email"], select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #032040;
-    border-radius: 5px;
-    font-family: 'sans-serif', serif;
-    font-size: 1.0em;
-  }
+.fa-graduation-cap {
+  color: #032040;
+  font-size: 40px;
+  display: block;
+  margin: 0 auto 5px;
+  text-align: center;
+}
 
-  select {
-    cursor: pointer;
-    appearance: none;
-  }
+input[type="email"], select, input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #032040;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 1.0em;
+}
 
-  .select-wrapper {
-    position: relative;
-    width: 100%;
-  }
+select {
+  cursor: pointer;
+  appearance: none;
+}
 
-  .select-wrapper select {
-    width: 100%;
-    padding-right: 30px; /* Make room for the arrow */
-    appearance: none; /* Removes default browser styling */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-    border: 2px solid #032040;
-    border-radius: 5px;
-    font-family: 'sans-serif', serif;
-    font-size: 1.0em;
-    padding: 10px;
-    box-sizing: border-box; /* Includes padding and border in the element's total width */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding-right: 30px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 5px;
+  font-size: 1.0em;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 .select-wrapper .arrow {
   border-bottom: 2px solid #000;
   border-right: 2px solid #000;
-  position: absolute;
-  top: 45%;
+  position: absolute; 
+  top: 50%;
   right: 20px;
   width: 10px;
   height: 10px;
-  transform: rotate(45deg) translateY(-50%);
-  pointer-events: none; /* Makes sure clicks pass through to the select element */
-}
-
-.role-selection {
-    display: flex;  
-    flex-wrap: wrap;  
-    gap: 10px;  
-    margin: 20px 0;  
+  transform: rotate(45deg) translateY(-50%); 
+  pointer-events: none;
 }
 
 
-.role-selection input[type="radio"] {
-    appearance: none;  
-    width: 18px; 
-    height: 18px;  
-    margin-right: 5px;  
-    background-color: #f1f1f1; 
-    border: 2px solid #032040; 
-    cursor: pointer;  
-    transition: background 0.3s;;
+input[type="submit"], input[type="button"] {
+  width: 60%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #032040;
+  color: white;
+  cursor: pointer;
+  margin: 40px auto 0;
+  font-size: 1.0em;
+  font-family: sans-serif;
 }
 
-
-.role-selection label {
-    background-color: #f1f1f1;
-    color: #032040;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px 10px;  
-    display: inline-flex;  
-    align-items: center;  
-    margin: 0; 
+input[type="submit"]:hover, input[type="button"]:hover {
+  background-color: #628eCB;
 }
 
-
-.role-selection input[type="radio"]:checked + label {
-    background-color: #032040;
-    color: white;
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('images/81998B8A-7F79-4052-BED3-517A1C9C16BB.jpeg') no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+  filter: blur(1.5px);
 }
 
-.role-selection input[type="radio"]:checked::after {
-  content: "";
-  display: block;
-  width: 10px;
-  height: 10px;
-  margin: 2px auto;
-  background-color: white;
+.returnButton {
+  display: block; /* Makes the link behave like a block-level element */
+  width: 50%; /* Matches the width of your submit button */
+  padding: 10px;
+  margin: 10px auto 0; /* Adds margin to the top */
+  border: none;
+  border-radius: 5px;
+  background-color: #194f9a;
+  color: white;
+  cursor: pointer;
+  text-align: center; /* Centers the text inside the button */
+  font-size: 1.0em; /* 2.25 times the size of the current font size */
+
 }
+.returnButton:hover {
 
-.role-selection > label {
-    display: inline-flex; 
-}
+  background-color: #628eCB;
 
-
-  input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #032040; 
-    border-radius: 5px;
-    font-family: 'sans-serif', serif; 
-    font-size: 1.0em; 
-  }
-
-  
-  
-  input[type="submit"], input[type="button"] {
-    width: 60%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #032040;
-    color: white;
-    cursor: pointer;
-    margin: 40px auto 0; /* Adds margin to the top */
-    font-family: 'sans-serif', serif; /* Garamond is the primary font, with a generic serif as fallback */
-    font-size: 1.0em; /* 2.25 times the size of the current font size */
-
-  }
-  
-  input[type="submit"]:hover, input[type="button"]:hover {
-    background-color: #196ac0;
-  }
-  
-  .background-image {
-    position: fixed; /* Fixed position to cover the entire viewport */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('images/81998B8A-7F79-4052-BED3-517A1C9C16BB.jpeg') no-repeat center center;
-    background-size: cover;
-    z-index: -1; /* Ensures the image stays behind other content */
-    filter: blur(1.5px);
 }
