@@ -92,7 +92,6 @@ body {
 /* Specific background color for right-aligned messages */
 .right .message {
     background-color: #8AAEE0; /* Light green background specifically for messages within .right */
-    color
 }
 
 /* Specific background color for left-aligned messages (optional) */
