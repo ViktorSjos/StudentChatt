@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ message, userid: currentUserId })
             })
-            .then(response => response.json())
-            .then(data => {
-                addMessageToDOM(data, true);
-                input.value = ''; // Clear input after sending
-            })
-            .catch(error => console.error('Error sending message:', error));
+                .then(response => response.json())
+                .then(data => {
+                    addMessageToDOM(data, true);
+                    input.value = ''; // Clear input after sending
+                })
+                .catch(error => console.error('Error sending message:', error));
         }
     }
 
@@ -28,19 +28,22 @@ document.addEventListener('DOMContentLoaded', function () {
         messageContainer.classList.add(isCurrentUser ? 'right' : 'left', 'message-container');
         messageContainer.setAttribute('data-id', msg.id);
 
-        const userIdLabel = document.createElement('div');
-        userIdLabel.classList.add('user-id-label');
-        userIdLabel.textContent = `User ID: ${msg.userid}`;
+        const usernameLabel = document.createElement('div');
+        usernameLabel.classList.add('user-id-label');
+        usernameLabel.textContent = `${msg.username || 'Unknown User'}`; // Handle potentially missing usernames
 
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message');
         messageDiv.textContent = msg.message;
 
+        // Apply CSS color based on alignment
+        messageDiv.style.backgroundColor = isCurrentUser ? '#dcf8c6' : '#add8e6'; // Right messages are light green, left are light blue
+
         const timeLabel = document.createElement('div');
         timeLabel.classList.add('time-label');
-        timeLabel.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+        timeLabel.textContent = new Date(msg.senttime).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
 
-        messageContainer.appendChild(userIdLabel);
+        messageContainer.appendChild(usernameLabel);
         messageContainer.appendChild(messageDiv);
         messageContainer.appendChild(timeLabel);
 
@@ -48,13 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    sendButton.addEventListener('click', sendMessage);
-    input.addEventListener('keypress', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            sendMessage();
-        }
-    });
+
+
 
     fetch('/get-messages')
         .then(response => response.json())
