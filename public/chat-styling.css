@@ -1,11 +1,13 @@
 body {
     display: flex;
-    font-family: Arial, sans-serif;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 .navmenu {
-    width: 45px; /* Width of the navigation menu */
-    background-color: #032040;
+    width: 55px; /* Width of the navigation menu */
+    background-color: #395886;
     display: flex; /* Ensures content is flexibly arranged */
     flex-direction: column; /* Aligns children (icons) vertically */
     align-items: center; /* Centers content horizontally in the container */
@@ -15,14 +17,14 @@ body {
 }
 
 .navmenu img {
-   padding: 10px;
+    padding: 12px;
     height: auto; /* Maintain aspect ratio */
     max-width: 20px; /* Optional: you can limit the image size further if necessary */
     transition: transform 0.3s;
 }
 
 .navmenu a:hover, .navmenu a:focus {
-    background-color: rgb(7, 80, 153); /* Change background on hover */
+    background-color: #638ECB; /* Change background on hover */
     outline: none; /* Remove focus outline */
     border-radius: 50%;
 }
@@ -32,7 +34,7 @@ body {
 
 .sidebar {
     width: 200px;
-    background-color: #ffffff;
+    background-color: #f0f3fa;
     height: 100vh;
     overflow-y: auto;
 }
@@ -61,7 +63,7 @@ body {
 }
 
 .sidebar li.active {
-    background-color: lightgray;
+    background-color: #D5DEEF;
 }
 
 .chat-window {
@@ -70,7 +72,7 @@ body {
 }
 
 .header {
-    background-color: #f0f0f0;
+    background-color: #f0f3fa;
     padding: 20px;
     font-size: 20px;
 }
@@ -91,18 +93,19 @@ body {
 
 /* Specific background color for right-aligned messages */
 .right .message {
-    background-color: #dcf8c6; /* Light green background specifically for messages within .right */
+    background-color: #8AAEE0; /* Light green background specifically for messages within .right */
 }
 
 /* Specific background color for left-aligned messages (optional) */
 .left .message {
-    background-color: #add8e6; /* Light blue background specifically for messages within .left */
+    background-color: #F0F3FA; /* Light blue background specifically for messages within .left */
 }
 
 .chat-container {
-    width: 70%; /* Increased width for larger display */
-    height: 80%; /* Increased height for extended chat history */
+    width: 100%; /* Increased width for larger display */
+    height: 92vh; /* Increased height for extended chat history */
     border: 1px solid #ccc;
+    background-color: #f0f3fa;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -110,10 +113,11 @@ body {
 
 /* Styling for the chat box where messages are displayed */
 .chat-box {
+    background-color: #f0f3fa;
     flex-grow: 1;
     overflow-y: auto;
     padding: 5px;
-    margin-bottom: 10px;
+    
 }
 
 /* Aligns message container for user ID 1 to the right */
@@ -149,7 +153,7 @@ body {
 }
 
 .message-input input {
-    flex-grow: 1;
+    flex-grow:W 1;
     padding: 10px;
     margin-right: 10px;
 }
@@ -158,4 +162,3 @@ body {
     padding: 10px 20px;
     cursor: pointer;
 }
-

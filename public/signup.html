@@ -6,12 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <link rel="stylesheet" href="stylingSignUp.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
+    <style>
+        .fa-graduation-cap {
+            color: #032040;
+            font-size: 35px;
+            display: block;
+            margin: 0 auto 5px;
+            text-align: center;
+        }
+    </style>
+    
     <div class="background-image"></div>
     <div class="signUp-container">
 
-        <div class="select-wrapper">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+
+        <h2 class="rubrikStu1">STU</h2>
+        
+        <form>
+          <div class="arrow"></div>
+        
+          <input type="email" placeholder="Email" required>
+          <input type="text" placeholder="Username" required>
+          <input type="password" placeholder="Password" required>
+          
+          <div class="select-wrapper">
             <select>
                 <option value="">Select Education</option>
                 <option value="Option 1">Statsvetenskap</option>
@@ -25,42 +48,15 @@
             </select>
             <div class="arrow"></div>
         </div>
-        
-        <h2 class="rubrikStu1">STU</h2>
-        
-        <form>
-            <div class="role-section">
-                <input type="radio" id="student" name="role" checked/>
-                <label for="student">Student</label>
-                <input type="radio" id="organization" name="role"/>
-                <label for="organization">Organization</label>
-            </div>
-
-           
-            <div class="arrow"></div>
-           
-
-          <input type="email" placeholder="Email" required>
-          <input type="text" placeholder="Username" required>
-          <input type="password" placeholder="Password" required>
-          <select id="education" name="education" required>
-             <option value="">--Select Education--</option>
-             <option value="">Statsvetenskap</option>
-             <option value="">Systemvetenskap</option>
-             <option value="">Grafisk Design</option>
-             <option value="">Digital Tjänsteutveckling</option>
-             <option value="">Sociologi</option>
-             <option value="">Psykologi</option>
-             <option value="">Rättsvetenskap</option>
-          </select>
           
         <div class="button-container">
-            <input type="button" value="Log In">
             <input type="submit" value="Create Account">
         </div>
+        <a href="login.html" class="returnButton">Return</a>
 
-            
         </form>
     </div>
+
+
 </body>
 </html>
