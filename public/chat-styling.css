@@ -5,7 +5,7 @@ body {
 
 .navmenu {
     width: 45px; /* Width of the navigation menu */
-    background-color: #032040;
+    background-color: #395886;
     display: flex; /* Ensures content is flexibly arranged */
     flex-direction: column; /* Aligns children (icons) vertically */
     align-items: center; /* Centers content horizontally in the container */
@@ -22,7 +22,7 @@ body {
 }
 
 .navmenu a:hover, .navmenu a:focus {
-    background-color: rgb(7, 80, 153); /* Change background on hover */
+    background-color: #638ECB; /* Change background on hover */
     outline: none; /* Remove focus outline */
     border-radius: 50%;
 }
@@ -91,12 +91,13 @@ body {
 
 /* Specific background color for right-aligned messages */
 .right .message {
-    background-color: #dcf8c6; /* Light green background specifically for messages within .right */
+    background-color: #8AAEE0; /* Light green background specifically for messages within .right */
+    color
 }
 
 /* Specific background color for left-aligned messages (optional) */
 .left .message {
-    background-color: #add8e6; /* Light blue background specifically for messages within .left */
+    background-color: #F0F3FA; /* Light blue background specifically for messages within .left */
 }
 
 .chat-container {
