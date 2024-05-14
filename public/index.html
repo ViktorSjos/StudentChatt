@@ -3,14 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chat Test</title>
-    <link rel="stylesheet" href="styling.css">
-
+    <title>Login</title>
+    <link rel="stylesheet" href="stylingLog.css">
 </head>
 <body>
-    <a href="chat-private.html">Go to chat</a>
+<div class="background-image"></div>
+<div class="login-container">
+    <h2 class="rubrikStu">STU</h2>
+    <form id="login-form">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="submit" value="Log In">
+    </form>
+    <a href="signup.html" class="signUpButton">Create Account</a>
+    <p id="login-error" style="color: red; display: none;">Invalid login</p>
+</div>
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
-
-    <script src="script.js"></script>
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `chat-private.html?user_id=${data.user_id}`;
+                } else {
+                    document.getElementById('login-error').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('login-error').style.display = 'block';
+            });
+    });
+</script>
 </body>
 </html>

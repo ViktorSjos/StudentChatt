@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messaging App - Private Chats</title>
+    <title>Messaging App - Company Chats</title>
     <link rel="stylesheet" href="chat-styling.css">
 </head>
 <body>
@@ -12,13 +12,13 @@
 
 <div class="navmenu">
     <a href="index.html"><img src="images/back.png" alt="Back to main"></a>
-    <a href="chat-private.html" class="active"><img src="images/user.png" alt="Private chats"></a>
+    <a href="chat-private.html"><img src="images/user.png" alt="Private chats"></a>
     <a href="chat-group.html"><img src="images/group.png" alt="Group chats"></a>
-    <a href="chat-company.html"><img src="images/suitcase.png" alt="Company chats"></a>
+    <a href="chat-company.html" class="active"><img src="images/suitcase.png" alt="Company chats"></a>
 </div>
 
 <div class="sidebar">
-    <h1>Private</h1>
+    <h1>Company</h1>
     <ul id="chat-list"></ul>
 </div>
 
@@ -33,7 +33,6 @@
     </div>
 </div>
 
-<!-- Context menu for right-click actions -->
 <div id="context-menu" class="context-menu" style="display: none;">
     <ul>
         <li id="delete-option">Delete</li>
@@ -68,7 +67,7 @@
 
         // Fetch chats for the current user
         function fetchChats() {
-            return fetch('/chats/private')
+            return fetch('/chats/company')
                 .then(response => response.json())
                 .then(chats => {
                     chatList.innerHTML = '';
