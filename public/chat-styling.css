@@ -124,14 +124,14 @@ body {
 .right {
     margin-left: auto; /* Pushes the container to the right */
     margin-right: 0; /* Keeps container at the right edge */
-    width: 80%; /* Sets the width of the message box to 80% */
+    width: 50%; /* Sets the width of the message box to 80% */
 }
 
 /* Aligns message container for other user IDs to the left */
 .left {
     margin-right: auto; /* Pushes the container to the left */
     margin-left: 0; /* Keeps container at the left edge */
-    width: 80%; /* Sets the width of the message box to 80% */
+    width: 50%; /* Sets the width of the message box to 80% */
 }
 
 .message {
