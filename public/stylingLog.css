@@ -71,7 +71,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('images/81998B8A-7F79-4052-BED3-517A1C9C16BB.jpeg') no-repeat center center;
+    background: url('public/images/landscape.png') no-repeat center center;
     background-size: cover;
     z-index: -1; /* Ensures the image stays behind other content */
     filter: blur(1.5px);
