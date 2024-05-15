@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'admin',
+    password: '',
     database: 'chat_system',
     charset: 'utf8mb4'
 });
