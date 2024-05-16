@@ -17,18 +17,20 @@
     <a href="chat-company.html"><img src="images/suitcase.png" alt="Company chats"></a>
 </div>
 
-<div class="sidebar">
-    <h1>Private</h1>
-    <ul id="chat-list"></ul>
-</div>
+<div class="container"> <!-- Added container to hold sidebar and chat-window -->
+    <div class="sidebar">
+        <h1>Private</h1>
+        <ul id="chat-list"></ul>
+    </div>
 
-<div class="chat-window">
-    <div class="header">Chat</div>
-    <div class="chat-container">
-        <div class="chat-box"></div>
-        <div class="input-container">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
-            <button id="send-button" class="send-button">Send</button>
+    <div class="chat-window">
+        <div class="header">Chat</div>
+        <div class="chat-container">
+            <div class="chat-box"></div>
+            <div class="input-container">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+                <button id="send-button" class="send-button">Send</button>
+            </div>
         </div>
     </div>
 </div>
@@ -136,8 +138,6 @@
             messageDiv.classList.add('message');
             messageDiv.textContent = msg.message;
 
-            messageDiv.style.backgroundColor = isCurrentUser ? '#dcf8c6' : '#add8e6';
-
             const timeLabel = document.createElement('div');
             timeLabel.classList.add('time-label');
             timeLabel.textContent = new Date(msg.senttime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -188,7 +188,8 @@
 
         sendButton.addEventListener('click', sendMessage);
         input.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
                 sendMessage();
             }
         });

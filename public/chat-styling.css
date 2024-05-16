@@ -3,6 +3,7 @@ body {
     font-family: sans-serif;
     padding: 0;
     margin: 0;
+    height: 100vh; /* Ensure the body takes the full height of the viewport */
 }
 
 .navmenu {
@@ -13,7 +14,7 @@ body {
     align-items: center; /* Centers content horizontally in the container */
     justify-content: flex-start; /* Aligns children to start from the top */
     height: 100vh; /* Full height */
-    transition: background-color 0,3s;
+    transition: background-color 0.3s;
 }
 
 .navmenu img {
@@ -29,11 +30,15 @@ body {
     border-radius: 50%;
 }
 
-
-
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent overflow */
+}
 
 .sidebar {
-    width: 200px;
+    width: 200px; /* Fixed width for the sidebar */
     background-color: #f0f3fa;
     height: 100vh;
     overflow-y: auto;
@@ -43,14 +48,14 @@ body {
     font-size: 18px;
     color: black;
     padding: 6px;
-    text-align:center;
+    text-align: center;
     font-weight: 150;
-    
 }
 
 .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0; /* Ensure no extra space around the list */
     border-style: solid;
     border-width: 1px;
 }
@@ -67,8 +72,12 @@ body {
 }
 
 .chat-window {
-    flex-grow: 1;
+    flex-grow: 1; /* Take up the remaining space */
     border-left: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ensure the chat window takes the full height of the viewport */
+    overflow: hidden; /* Prevent overflow */
 }
 
 .header {
@@ -79,7 +88,7 @@ body {
 
 .messages {
     padding: 20px;
-    height: calc(100vh - 160px);
+    flex-grow: 1; /* Ensure the messages section expands to take available space */
     overflow-y: auto;
 }
 
@@ -90,58 +99,51 @@ body {
     padding: 2px 5px; /* Padding for better text display */
 }
 
-
 /* Specific background color for right-aligned messages */
 .right .message {
-    background-color: #8AAEE0; /* Light green background specifically for messages within .right */
+    background-color: #395886;
+    color: #fff; /* Ensure text is readable */
 }
 
-/* Specific background color for left-aligned messages (optional) */
+/* Specific background color for left-aligned messages */
 .left .message {
-    background-color: #F0F3FA; /* Light blue background specifically for messages within .left */
+    background-color: #B1C9EF;
+    color: #000; /* Ensure text is readable */
 }
 
 .chat-container {
-    width: 100%; /* Increased width for larger display */
-    height: 92vh; /* Increased height for extended chat history */
-    border: 1px solid #ccc;
-    background-color: #f0f3fa;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* Styling for the chat box where messages are displayed */
 .chat-box {
     background-color: #f0f3fa;
     flex-grow: 1;
     overflow-y: auto;
     padding: 5px;
-    
 }
 
-/* Aligns message container for user ID 1 to the right */
 .right {
-    margin-left: auto; /* Pushes the container to the right */
-    margin-right: 0; /* Keeps container at the right edge */
-    width: 45%; /* Sets the width of the message box to 80% */
-   
-    
+    margin-left: auto;
+    margin-right: 0;
+    width: 45%;
 }
 
-/* Aligns message container for other user IDs to the left */
 .left {
-    margin-right: auto; /* Pushes the container to the left */
-    margin-left: 0; /* Keeps container at the left edge */
-    width: 45%; /* Sets the width of the message box to 80% */
-   
+    margin-right: auto;
+    margin-left: 0;
+    width: 45%;
 }
 
+/* Ensure the messages have a maximum width and wrap text appropriately */
 .message {
-    background-color: #ddd;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
+    max-width: 80%;
+    word-wrap: break-word;
 }
 
 .message.response {
@@ -156,7 +158,7 @@ body {
 }
 
 .message-input input {
-    flex-grow:W 1;
+    flex-grow: 1;
     padding: 10px;
     margin-right: 10px;
 }
@@ -165,6 +167,7 @@ body {
     padding: 10px 20px;
     cursor: pointer;
 }
+
 .input-container {
     display: flex;
     align-items: center;
@@ -177,10 +180,13 @@ body {
 .chat-input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #f0f3fa;
+    border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
     font-size: 16px;
+    resize: none;
+    height: auto;
+    overflow: hidden;
 }
 
 .chat-input:focus {
