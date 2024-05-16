@@ -9,6 +9,7 @@
 <body>
 <input type="hidden" id="current-chat-id" value="">
 <input type="hidden" id="current-user-id" value="">
+<input type="hidden" id="chat-type" value="private">
 
 <div class="navmenu">
     <a href="index.html"><img src="images/back.png" alt="Back to main"></a>
@@ -17,14 +18,14 @@
     <a href="chat-company.html"><img src="images/suitcase.png" alt="Company chats"></a>
 </div>
 
-<div class="container"> <!-- Added container to hold sidebar and chat-window -->
+<div class="container">
     <div class="sidebar">
         <h1>Private</h1>
         <ul id="chat-list"></ul>
+        <button id="create-chat-button" class="send-button">Create New Chat</button>
     </div>
 
     <div class="chat-window">
-        <div class="header">Chat</div>
         <div class="chat-container">
             <div class="chat-box"></div>
             <div class="input-container">
@@ -35,164 +36,16 @@
     </div>
 </div>
 
-<!-- Context menu for right-click actions -->
-<div id="context-menu" class="context-menu" style="display: none;">
+<div id="context-menu" class="context-menu">
     <ul>
         <li id="delete-option">Delete</li>
     </ul>
 </div>
 
+<script src="script.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const chatBox = document.querySelector('.chat-box');
-        const input = document.getElementById('chat-input');
-        const sendButton = document.getElementById('send-button');
-        const chatList = document.getElementById('chat-list');
-        const contextMenu = document.getElementById('context-menu');
-        const deleteOption = document.getElementById('delete-option');
-        let currentUserId;
-        let currentChatId;
-        let currentUsername;
-        let selectedMessageId;
-
-        // Fetch current session info
-        function fetchCurrentSession() {
-            return fetch('/current-session')
-                .then(response => response.json())
-                .then(session => {
-                    currentUserId = session.user_id;
-                    currentUsername = session.username;
-                    document.getElementById('current-user-id').value = currentUserId;
-                    fetchChats();
-                })
-                .catch(error => console.error('Error fetching current session:', error));
-        }
-
-        // Fetch chats for the current user
-        function fetchChats() {
-            return fetch('/chats/private')
-                .then(response => response.json())
-                .then(chats => {
-                    chatList.innerHTML = '';
-                    chats.forEach(chat => {
-                        const li = document.createElement('li');
-                        li.textContent = chat.chat_name;
-                        li.dataset.chat = chat.id;
-                        li.addEventListener('click', () => {
-                            currentChatId = chat.id;
-                            document.getElementById('current-chat-id').value = currentChatId;
-                            fetchMessages(currentChatId);
-                        });
-                        chatList.appendChild(li);
-                    });
-                })
-                .catch(error => console.error('Error fetching chats:', error));
-        }
-
-        // Fetch messages for a specific chat
-        function fetchMessages(chatId) {
-            fetch(`/get-messages/${chatId}`)
-                .then(response => response.json())
-                .then(messages => {
-                    chatBox.innerHTML = '';
-                    messages.forEach(message => {
-                        addMessageToDOM(message, message.user_id === currentUserId);
-                    });
-                })
-                .catch(error => console.error('Error loading messages:', error));
-        }
-
-        function sendMessage() {
-            const message = input.value.trim();
-            if (message) {
-                fetch('/send-message', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message, user_id: currentUserId, chat_id: currentChatId })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        addMessageToDOM({
-                            id: data.id,
-                            message,
-                            username: currentUsername,
-                            user_id: currentUserId,
-                            senttime: new Date()
-                        }, true);
-                        input.value = ''; // Clear input after sending
-                    })
-                    .catch(error => console.error('Error sending message:', error));
-            }
-        }
-
-        function addMessageToDOM(msg, isCurrentUser) {
-            const messageContainer = document.createElement('div');
-            messageContainer.classList.add(isCurrentUser ? 'right' : 'left', 'message-container');
-            messageContainer.setAttribute('data-id', msg.id);
-
-            const usernameLabel = document.createElement('div');
-            usernameLabel.classList.add('user-id-label');
-            usernameLabel.textContent = `${msg.username || 'Unknown User'}`;
-
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message');
-            messageDiv.textContent = msg.message;
-
-            const timeLabel = document.createElement('div');
-            timeLabel.classList.add('time-label');
-            timeLabel.textContent = new Date(msg.senttime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-            messageContainer.appendChild(usernameLabel);
-            messageContainer.appendChild(messageDiv);
-            messageContainer.appendChild(timeLabel);
-
-            messageContainer.addEventListener('contextmenu', (event) => {
-                event.preventDefault();
-                selectedMessageId = msg.id;
-                showContextMenu(event);
-            });
-
-            chatBox.appendChild(messageContainer);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function showContextMenu(event) {
-            contextMenu.style.display = 'block';
-            contextMenu.style.left = `${event.pageX}px`;
-            contextMenu.style.top = `${event.pageY}px`;
-        }
-
-        function hideContextMenu() {
-            contextMenu.style.display = 'none';
-        }
-
-        function deleteMessage() {
-            fetch(`/delete-message/${selectedMessageId}`, {
-                method: 'DELETE'
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const messageElement = document.querySelector(`[data-id='${selectedMessageId}']`);
-                    if (messageElement) {
-                        messageElement.remove();
-                    }
-                    hideContextMenu();
-                })
-                .catch(error => console.error('Error deleting message:', error));
-        }
-
-        document.addEventListener('click', hideContextMenu);
-        deleteOption.addEventListener('click', deleteMessage);
-
-        fetchCurrentSession();
-
-        sendButton.addEventListener('click', sendMessage);
-        input.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                sendMessage();
-            }
-        });
+    document.getElementById('create-chat-button').addEventListener('click', function() {
+        window.location.href = 'create-chat.html';
     });
 </script>
 </body>

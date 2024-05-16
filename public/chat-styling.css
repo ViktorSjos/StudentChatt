@@ -1,3 +1,4 @@
+/* General styling for the page */
 body {
     display: flex;
     font-family: sans-serif;
@@ -207,4 +208,29 @@ body {
 
 .send-button:hover {
     background-color: #395886;
+}
+
+/* Context menu styling */
+.context-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none; /* Hide by default */
+}
+
+.context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.context-menu ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.context-menu ul li:hover {
+    background-color: #f4f4f4;
 }

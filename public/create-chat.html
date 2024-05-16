@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Private Chat</title>
+    <link rel="stylesheet" href="create-chat-styling.css">
+</head>
+<body>
+<div class="container">
+    <h1>Create New Private Chat</h1>
+    <form id="create-chat-form">
+        <label for="chat-name">Chat Name:</label>
+        <input type="text" id="chat-name" name="chat_name" required>
+
+        <label for="user-select">Select User:</label>
+        <select id="user-select" name="user_id" required></select>
+
+        <button type="submit" class="send-button">Create Chat</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const userSelect = document.getElementById('user-select');
+        const form = document.getElementById('create-chat-form');
+        let currentUserId;
+
+        // Fetch the current session to get the current user's ID
+        fetch('/current-session')
+            .then(response => response.json())
+            .then(session => {
+                currentUserId = session.user_id;
+
+                // Fetch all users to populate the select list
+                return fetch('/users');
+            })
+            .then(response => response.json())
+            .then(users => {
+                users.forEach(user => {
+                    if (user.id !== currentUserId) { // Exclude current user
+                        const option = document.createElement('option');
+                        option.value = user.id;
+                        option.textContent = user.username;
+                        userSelect.appendChild(option);
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching users:', error));
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const chatName = document.getElementById('chat-name').value;
+            const userId = userSelect.value;
+
+            fetch('/create-chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ chat_name: chatName, user_id: userId, current_user_id: currentUserId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = 'chat-private.html';
+                    } else {
+                        console.error('Error creating chat:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error creating chat:', error));
+        });
+    });
+</script>
+</body>
+</html>

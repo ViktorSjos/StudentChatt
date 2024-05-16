@@ -1,0 +1,109 @@
+/* General styling for the page */
+body {
+    display: flex;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    height: 100vh; /* Ensure the body takes the full height of the viewport */
+    background-color: #f0f3fa;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; /* Set max width for the form container */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    color: #395886;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #395886;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px; /* Limit the height of the user list */
+    overflow-y: auto; /* Add scroll for overflow */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+    border-bottom: none; /* Remove the border for the last item */
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.send-button {
+    padding: 10px 20px;
+    background-color: #395886;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: center; /* Center the button */
+}
+
+.send-button:hover {
+    background-color: #638ECB;
+}
+
+/* Scrollbar styling */
+ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+ul::-webkit-scrollbar-track {
+    background: #f0f3fa;
+    border-radius: 4px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: #395886;
+    border-radius: 4px;
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+    background: #638ECB;
+}

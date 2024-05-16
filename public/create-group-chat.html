@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Group Chat</title>
+    <link rel="stylesheet" href="create-chat-styling.css">
+</head>
+<body>
+<div class="container">
+    <h1>Create Group Chat</h1>
+    <form id="create-group-chat-form">
+        <label for="chat-name">Chat Name:</label>
+        <input type="text" id="chat-name" name="chat-name" required>
+        <h2>Select Members:</h2>
+        <ul id="user-list">
+            <!-- User list will be populated here -->
+        </ul>
+        <button type="submit" class="send-button">Create Chat</button>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/current-session')
+            .then(response => response.json())
+            .then(session => {
+                const currentUserId = session.user_id;
+                fetch('/users')
+                    .then(response => response.json())
+                    .then(users => {
+                        const userList = document.getElementById('user-list');
+                        users.forEach(user => {
+                            if (user.id !== currentUserId) {
+                                const li = document.createElement('li');
+                                const checkbox = document.createElement('input');
+                                checkbox.type = 'checkbox';
+                                checkbox.value = user.id;
+                                li.appendChild(checkbox);
+                                li.appendChild(document.createTextNode(` ${user.username}`));
+                                userList.appendChild(li);
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error fetching users:', error));
+            })
+            .catch(error => console.error('Error fetching current session:', error));
+
+        document.getElementById('create-group-chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const chatName = document.getElementById('chat-name').value;
+            const checkboxes = document.querySelectorAll('#user-list input[type="checkbox"]:checked');
+            const userIds = Array.from(checkboxes).map(checkbox => parseInt(checkbox.value));
+
+            fetch('/current-session')
+                .then(response => response.json())
+                .then(session => {
+                    const currentUserId = session.user_id;
+                    fetch('/create-group-chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_name: chatName, user_ids: userIds, current_user_id: currentUserId })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = 'chat-group.html';
+                            } else {
+                                console.error('Error creating group chat:', data.message);
+                            }
+                        })
+                        .catch(error => console.error('Error creating group chat:', error));
+                })
+                .catch(error => console.error('Error fetching current session:', error));
+        });
+    });
+</script>
+</body>
+</html>

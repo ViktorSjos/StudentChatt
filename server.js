@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'admin',
     database: 'chat_system',
     charset: 'utf8mb4'
 });
@@ -46,6 +46,14 @@ app.get('/chat-company.html', (req, res) => {
     res.sendFile(__dirname + '/public/chat-company.html');
 });
 
+app.get('/create-chat.html', (req, res) => {
+    res.sendFile(__dirname + '/public/create-chat.html');
+});
+
+app.get('/create-group-chat.html', (req, res) => {
+    res.sendFile(__dirname + '/public/create-group-chat.html');
+});
+
 // API endpoint to fetch chats for the current logged-in user based on chat type
 app.get('/chats/:type', (req, res) => {
     const chatType = req.params.type;
@@ -69,9 +77,9 @@ app.get('/chats/:type', (req, res) => {
 app.get('/get-messages/:chatId', (req, res) => {
     const chatId = req.params.chatId;
     const sql = `
-        SELECT users.username, messages.message, messages.timestamp AS senttime, messages.user_id
+        SELECT messages.id, users.username, messages.message, messages.timestamp AS senttime, messages.user_id
         FROM messages
-        JOIN users ON messages.user_id = users.id
+                 JOIN users ON messages.user_id = users.id
         WHERE messages.chat_id = ?
         ORDER BY messages.timestamp ASC;
     `;
@@ -86,7 +94,6 @@ app.get('/get-messages/:chatId', (req, res) => {
 });
 
 // Endpoint to delete a message by its ID
-// Endpoint to delete a message by its ID
 app.delete('/delete-message/:id', (req, res) => {
     const messageId = req.params.id;
     const sql = 'DELETE FROM messages WHERE id = ?';
@@ -94,12 +101,11 @@ app.delete('/delete-message/:id', (req, res) => {
     db.query(sql, [messageId], (error, results) => {
         if (error) {
             console.error('Error deleting message:', error.message);
-            return res.status(500).send('Error deleting message');
+            return res.status(500).json({ success: false, message: 'Error deleting message' });
         }
-        res.send({ message: 'Message deleted' });
+        res.json({ success: true, message: 'Message deleted' });
     });
 });
-
 
 // API endpoint to send a new message
 app.post('/send-message', (req, res) => {
@@ -149,8 +155,8 @@ app.get('/current-session', (req, res) => {
     const sql = `
         SELECT users.id AS user_id, users.username
         FROM logged_in_users
-        JOIN users ON logged_in_users.user_id = users.id
-        LIMIT 1;
+                 JOIN users ON logged_in_users.user_id = users.id
+            LIMIT 1;
     `;
 
     db.query(sql, (error, results) => {
@@ -158,6 +164,71 @@ app.get('/current-session', (req, res) => {
             return res.status(500).json({ success: false, message: 'No active session' });
         }
         res.json(results[0]);
+    });
+});
+
+// API endpoint to fetch all users
+app.get('/users', (req, res) => {
+    const sql = "SELECT id, username FROM users";
+    db.query(sql, (error, results) => {
+        if (error) {
+            return res.status(500).json({ success: false, message: 'Error fetching users' });
+        }
+        res.json(results);
+    });
+});
+
+// API endpoint to create a new private chat
+app.post('/create-chat', (req, res) => {
+    const { chat_name, user_id, current_user_id } = req.body;
+    const createChatSql = "INSERT INTO chats (chat_name, chat_type) VALUES (?, 'private')";
+    const getChatIdSql = "SELECT LAST_INSERT_ID() AS chat_id";
+    const createChatUserSql = "INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?), (?, ?)";
+
+    db.query(createChatSql, [chat_name], (error, results) => {
+        if (error) {
+            return res.status(500).json({ success: false, message: 'Error creating chat' });
+        }
+        db.query(getChatIdSql, (error, results) => {
+            if (error) {
+                return res.status(500).json({ success: false, message: 'Error getting chat ID' });
+            }
+            const chat_id = results[0].chat_id;
+            db.query(createChatUserSql, [current_user_id, chat_id, user_id, chat_id], (error, results) => {
+                if (error) {
+                    return res.status(500).json({ success: false, message: 'Error linking users to chat' });
+                }
+                res.json({ success: true, chat_id: chat_id });
+            });
+        });
+    });
+});
+
+// API endpoint to create a new group chat
+app.post('/create-group-chat', (req, res) => {
+    const { chat_name, user_ids, current_user_id } = req.body;
+    const createChatSql = "INSERT INTO chats (chat_name, chat_type) VALUES (?, 'group')";
+    const getChatIdSql = "SELECT LAST_INSERT_ID() AS chat_id";
+
+    db.query(createChatSql, [chat_name], (error, results) => {
+        if (error) {
+            return res.status(500).json({ success: false, message: 'Error creating chat' });
+        }
+        db.query(getChatIdSql, (error, results) => {
+            if (error) {
+                return res.status(500).json({ success: false, message: 'Error getting chat ID' });
+            }
+            const chat_id = results[0].chat_id;
+            const userChatValues = user_ids.map(user_id => [user_id, chat_id]).concat([[current_user_id, chat_id]]);
+            const createUserChatsSql = "INSERT INTO user_chat (user_id, chat_id) VALUES ?";
+
+            db.query(createUserChatsSql, [userChatValues], (error, results) => {
+                if (error) {
+                    return res.status(500).json({ success: false, message: 'Error linking users to chat' });
+                }
+                res.json({ success: true, chat_id: chat_id });
+            });
+        });
     });
 });
 
