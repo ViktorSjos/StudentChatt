@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function sendMessage() {
         const message = input.value.trim();
-        if (message) {
+        if (message && currentChatId) { // Ensure chat_id is available
             fetch('/send-message', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

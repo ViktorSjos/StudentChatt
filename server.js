@@ -232,6 +232,21 @@ app.post('/create-group-chat', (req, res) => {
     });
 });
 
+// New endpoint for user registration
+app.post('/register', (req, res) => {
+    const { email, username, password, education } = req.body;
+
+    const sql = "INSERT INTO users (email, username, password, education, user_type) VALUES (?, ?, ?, ?, 'Student')";
+
+    db.query(sql, [email, username, password, education], (error, results) => {
+        if (error) {
+            console.error('Error registering user:', error.message);
+            return res.status(500).json({ success: false, message: 'Error registering user' });
+        }
+        res.json({ success: true, message: 'User registered successfully' });
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });

@@ -43,6 +43,7 @@ body {
     background-color: #f0f3fa;
     height: 100vh;
     overflow-y: auto;
+    flex-shrink: 0; /* Prevent the sidebar from shrinking */
 }
 
 .sidebar h1 {
@@ -205,6 +206,8 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+
 
 .send-button:hover {
     background-color: #395886;

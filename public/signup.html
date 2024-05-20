@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,56 +6,79 @@
     <title>Signup</title>
     <link rel="stylesheet" href="stylingSignUp.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 <body>
-    <style>
-        .fa-graduation-cap {
-            color: #032040;
-            font-size: 35px;
-            display: block;
-            margin: 0 auto 5px;
-            text-align: center;
-        }
-    </style>
-    
-    <div class="background-image"></div>
-    <div class="signUp-container">
+<style>
+    .fa-graduation-cap {
+        color: #032040;
+        font-size: 35px;
+        display: block;
+        margin: 0 auto 5px;
+        text-align: center;
+    }
+</style>
 
-        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+<div class="background-image"></div>
+<div class="signUp-container">
+    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+    <h2 class="rubrikStu1">STU</h2>
 
-        <h2 class="rubrikStu1">STU</h2>
-        
-        <form>
-          <div class="arrow"></div>
-        
-          <input type="email" placeholder="Email" required>
-          <input type="text" placeholder="Username" required>
-          <input type="password" placeholder="Password" required>
-          
-          <div class="select-wrapper">
-            <select>
+    <form id="signup-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+
+        <div class="select-wrapper">
+            <select id="education" required>
                 <option value="">Select Education</option>
-                <option value="Option 1">Statsvetenskap</option>
-                <option value="Option 2">Systemvetenskap</option>
-                <option value="Option 3">Grafisk Design</option>
-                <option value="Option 4">Digital Tjänsteutveckling</option>
-                <option value="Option 5">Sociologi</option>
-                <option value="Option 6">Psykologi</option>
-                <option value="Option 7">Rättsvetenskap</option>
-
+                <option value="Statsvetenskap">Statsvetenskap</option>
+                <option value="Systemvetenskap">Systemvetenskap</option>
+                <option value="Grafisk Design">Grafisk Design</option>
+                <option value="Digital Tjänsteutveckling">Digital Tjänsteutveckling</option>
+                <option value="Sociologi">Sociologi</option>
+                <option value="Psykologi">Psykologi</option>
+                <option value="Rättsvetenskap">Rättsvetenskap</option>
             </select>
             <div class="arrow"></div>
         </div>
-          
+
         <div class="button-container">
             <input type="submit" value="Create Account">
         </div>
-        <a href="login.html" class="returnButton">Return</a>
+        <a href="index.html" class="returnButton">Return</a>
+    </form>
+</div>
 
-        </form>
-    </div>
+<script>
+    document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
+        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const education = document.getElementById('education').value;
 
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, username, password, education })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Account created successfully!');
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Error creating account: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error creating account. Please try again.');
+            });
+    });
+</script>
 </body>
 </html>
